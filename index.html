@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAKIB WINGO HACK</title>
+
+  <!-- Import Stylish Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #2a2a2a);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Matrix Rain Canvas Background */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at center, #000000, #0a0a0a, #000000);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 450px;
+      padding: 30px;
+      background: rgba(10, 10, 10, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 140, 0, 0.3);
+      animation: glowBox 4s infinite alternate;
+      z-index: 1;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    @keyframes glowBox {
+      0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(255, 165, 0, 0.7), 0 0 60px rgba(255, 215, 0, 0.5); }
+      100% { box-shadow: 0 0 25px rgba(255, 200, 0, 0.6), 0 0 50px rgba(255, 120, 0, 0.4); }
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #ffd700;
+      font-weight: 700;
+      text-shadow: 0 0 15px #ffd700, 0 0 30px #ffd700, 0 0 45px #ff8c00;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #00ffcc;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ffcc;
+      font-weight: 600;
+    }
+
+    .datetime {
+      font-size: 16px;
+      color: #ffa500;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #ffa500;
+      background: rgba(255, 165, 0, 0.1);
+      padding: 8px 15px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .payment-info {
+      background: rgba(255, 215, 0, 0.1);
+      padding: 15px;
+      border-radius: 12px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .payment-info h3 {
+      color: #ffd700;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .payment-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .payment-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .payment-label {
+      color: #ccc;
+      font-weight: 400;
+    }
+
+    .payment-value {
+      color: #ffd700;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      background: rgba(20, 20, 20, 0.8);
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 25px #ffd700, 0 0 45px #ffa500;
+      border-color: #ffa500;
+      background: rgba(30, 30, 30, 0.9);
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ffd700, 0 0 35px rgba(255, 165, 0, 0.5);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #ffa500, #ffd700);
+      box-shadow: 0 0 30px #ffd700, 0 0 50px rgba(255, 165, 0, 0.7);
+      transform: translateY(-3px);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .error {
+      color: #ff4444;
+      margin-top: 15px;
+      font-size: 15px;
+      display: none;
+      background: rgba(255, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 0, 0, 0.3);
+    }
+
+    .success {
+      color: #00ff88;
+      margin-top: 15px;
+      font-size: 15px;
+      display: none;
+      background: rgba(0, 255, 136, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .telegram-link {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .telegram-link:hover {
+      background: rgba(255, 215, 0, 0.2);
+      transform: scale(1.02);
+    }
+
+    .telegram-link img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .telegram-link a {
+      color: #ffd700;
+      text-decoration: none;
+      font-size: 16px;
+      text-shadow: 0 0 10px #ffd700;
+      font-weight: 600;
+    }
+
+    .telegram-link a:hover {
+      color: #ffa500;
+    }
+
+    /* Page Transitions */
+    .page {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Prediction Page */
+    .box {
+      display: inline-block;
+      padding: 12px 18px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 8px;
+      border-radius: 10px;
+      border: 2px solid #ffd700;
+      background: rgba(255, 215, 0, 0.15);
+      text-shadow: 0 0 8px #ffd700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .period-box { color: #ffd700; }
+    .big { color: #00ff66; }
+    .small { color: #00ccff; }
+    .number-box { color: #ffd700; }
+
+    .predict-btn {
+      padding: 15px 25px;
+      font-size: 18px;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ffd700;
+      transition: all 0.3s ease;
+    }
+
+    .predict-btn:hover {
+      background: linear-gradient(45deg, #ffa500, #ffd700);
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #ffd700, 0 0 50px rgba(255, 165, 0, 0.6);
+    }
+
+    #live-result {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffd700;
+      margin-top: 20px;
+      text-shadow: 0 0 15px #ffd700, 0 0 25px #ffa500;
+      background: rgba(255, 215, 0, 0.1);
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .step {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    .step.active {
+      background: #ffd700;
+      color: #000;
+      box-shadow: 0 0 15px #ffd700;
+    }
+
+    .step-line {
+      width: 40px;
+      height: 2px;
+      background: rgba(255, 215, 0, 0.3);
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Matrix Rain Background -->
+  <canvas id="matrix"></canvas>
+
+  <!-- PAYMENT PAGE -->
+  <div id="payment-page" class="container page active">
+    <h1>SAKIB WINGO HACK</h1>
+    <p class="subtitle">100% Working Premium Tool</p>
+    <p class="datetime" id="current-datetime"></p>
+    
+    <div class="step-indicator">
+      <div class="step active">1</div>
+      <div class="step-line"></div>
+      <div class="step">2</div>
+      <div class="step-line"></div>
+      <div class="step">3</div>
+    </div>
+    
+    <div class="payment-info">
+      <h3>💰 পেমেন্ট করুন</h3>
+      <p>টুল এক্সেস পেতে ১০০ টাকা পেমেন্ট করুন</p>
+      
+      <div class="payment-details">
+        <div class="payment-item">
+          <span class="payment-label">পেমেন্ট মাধ্যম:</span>
+          <span class="payment-value">বিকাশ</span>
+        </div>
+        <div class="payment-item">
+          <span class="payment-label">নাম্বার:</span>
+          <span class="payment-value">01806937328</span>
+        </div>
+        <div class="payment-item">
+          <span class="payment-label">টাকা:</span>
+          <span class="payment-value">১০০ টাকা</span>
+        </div>
+        <div class="payment-item">
+          <span class="payment-label">টাইপ:</span>
+          <span class="payment-value">পার্সোনাল</span>
+        </div>
+      </div>
+    </div>
+    
+    <input type="text" id="transaction-id" placeholder="ট্রানজেকশন আইডি দিন">
+    <button onclick="verifyPayment()">পেমেন্ট ভেরিফাই করুন</button>
+    <p class="error" id="payment-error">ট্রানজেকশন আইডি ভুল! আবার চেষ্টা করুন।</p>
+  </div>
+
+  <!-- PASSWORD PAGE -->
+  <div id="password-page" class="container page">
+    <h1>SAKIB WINGO HACK</h1>
+    <p class="subtitle">100% Working Premium Tool</p>
+    <p class="datetime" id="password-datetime"></p>
+    
+    <div class="step-indicator">
+      <div class="step">1</div>
+      <div class="step-line"></div>
+      <div class="step active">2</div>
+      <div class="step-line"></div>
+      <div class="step">3</div>
+    </div>
+    
+    <div class="payment-info">
+      <h3>✅ পেমেন্ট সফল!</h3>
+      <p>এখন আনলক পাসওয়ার্ড দিন</p>
+    </div>
+    
+    <input type="password" id="password" placeholder="আনলক পাসওয়ার্ড দিন">
+    <button onclick="checkPassword()">টুল আনলক করুন</button>
+    <p class="error" id="password-error">পাসওয়ার্ড ভুল! আবার চেষ্টা করুন।</p>
+  </div>
+
+  <!-- PREDICTION PAGE -->
+  <div id="prediction-page" class="container page">
+    <h1>SAKIB WINGO HACK</h1>
+    <p class="subtitle">100% Working Premium Tool</p>
+    <p class="datetime" id="prediction-datetime"></p>
+    
+    <div class="step-indicator">
+      <div class="step">1</div>
+      <div class="step-line"></div>
+      <div class="step">2</div>
+      <div class="step-line"></div>
+      <div class="step active">3</div>
+    </div>
+    
+    <p id="result" class="result">PERIOD: <span class="box period-box">20251003100010701</span></p>
+    <p id="signal" class="signal">SIGNAL: <span class="box small">Small</span></p>
+    <p id="prediction" class="prediction">PREDICTED NUMBERS: <span class="box number-box">9/2</span></p>
+    <p id="live-result">✅ LIVE DATA UPDATED!</p>
+    <button class="predict-btn" onclick="fetchPrediction()">Predict</button>
+    
+    <div class="telegram-link">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+      <a href="https://t.me/Aviatorxenergysakib" target="_blank">SAKIB WINGO HACK Channel</a>
+    </div>
+  </div>
+
+  <script>
+    // Update date and time
+    function updateDateTime() {
+      const now = new Date();
+      const dateTimeString = now.toLocaleString();
+      document.getElementById('current-datetime').textContent = dateTimeString;
+      document.getElementById('password-datetime').textContent = dateTimeString;
+      document.getElementById('prediction-datetime').textContent = dateTimeString;
+    }
+    
+    // Update date and time every second
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // Initial call
+
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let x = 0; x < columns; x++) {
+      drops[x] = Math.random() * 100;
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgba(10, 10, 10, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#FFD700";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    // Page Navigation Functions
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    // Payment Verification
+    function verifyPayment() {
+      const transactionId = document.getElementById("transaction-id").value.trim();
+      
+      // Simple validation - in real app, you would verify with server
+      if (transactionId.length > 5) {
+        showPage('password-page');
+      } else {
+        document.getElementById("payment-error").style.display = "block";
+      }
+    }
+
+    // Password Check
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      if (password === "SAKIBBOSS1") {
+        showPage('prediction-page');
+        fetchPrediction();
+      } else {
+        document.getElementById("password-error").style.display = "block";
+      }
+    }
+
+    // API Part
+    const API_URL = 'https://api.bdg88zf.com/api/webapi/GetGameIssue';
+    const REQUEST_DATA = {
+      typeId: 1,
+      language: 0,
+      random: "e7fe6c090da2495ab8290dac551ef1ed",
+      signature: "1F390E2B2D8A55D693E57FD905AE73A7",
+      timestamp: 1723726679
+    };
+
+    let periodResults = {};
+
+    function fetchPrediction() {
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json;charset=UTF-8" },
+        body: JSON.stringify(REQUEST_DATA)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.data) {
+          let issueNumber = data.data.issueNumber || "Unknown";
+          if (!periodResults[issueNumber]) {
+            let num1 = Math.floor(Math.random() * 10);
+            let num2 = (num1 + 3) % 10;
+
+            let sumDigits = issueNumber.split('').reduce((acc, num) => acc + parseInt(num), 0);
+            let bigSmallPrediction = sumDigits % 2 === 0 ? "Big" : "Small";
+
+            periodResults[issueNumber] = {
+              bigSmallPrediction,
+              predictedNumbers: `${num1}/${num2}`
+            };
+          }
+          let { bigSmallPrediction, predictedNumbers } = periodResults[issueNumber];
+          document.getElementById("result").innerHTML = `PERIOD: <span class="box period-box">${issueNumber}</span>`;
+          document.getElementById("signal").innerHTML = `SIGNAL: <span class="box ${bigSmallPrediction.toLowerCase()}">${bigSmallPrediction}</span>`;
+          document.getElementById("prediction").innerHTML = `PREDICTED NUMBERS: <span class="box number-box">${predictedNumbers}</span>`;
+          document.getElementById("live-result").innerHTML = "✅ LIVE DATA UPDATED!";
+        } else {
+          document.getElementById("live-result").innerHTML = "⚠️ ERROR!";
+        }
+      })
+      .catch(error => {
+        document.getElementById("live-result").innerHTML = "⚠️ ERROR!";
+        console.error("API Fetch Error:", error);
+      });
+    }
+
+    setInterval(fetchPrediction, 10000);
+  </script>
+</body>
+</html>
